@@ -135,5 +135,7 @@ def render_tab_content(active_tab, selected_categories, n_intervals):
     return content
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
+    import os 
+    port = int(os.getenv("PORT", 8050))
+    # Host '0.0.0.0' makes the app accessible externally.
+    app.run(debug=False, host='0.0.0.0', port=port)
