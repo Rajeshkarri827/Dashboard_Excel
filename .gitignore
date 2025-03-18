@@ -33,3 +33,13 @@ var/
 # OS-specific files
 .DS_Store
 Thumbs.db
+
+# Log files
+*.log
+
+# Jupyter Notebook checkpoints (if any)
+.ipynb_checkpoints/
+
+# Environment variables/settings
+.env
+
