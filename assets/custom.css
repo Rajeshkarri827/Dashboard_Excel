@@ -1,14 +1,29 @@
 /* custom.css */
 
-/* Style the navigation links */
+/* Navigation link styling */
 .nav-link {
     color: #ffffff !important;
     font-weight: bold !important;
     font-size: 18px;
     text-align: center;
 }
-
-/* Hover effect for navigation links */
 .nav-link:hover {
     color: #ffcc00 !important;
+}
+
+/* Sticky header (title) styling */
+.sticky-title {
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
+    z-index: 1010;
+    padding: 10px 0;
+}
+
+/* Sticky navbar styling */
+/* Adjust the top value so that it appears immediately below the header */
+.sticky-navbar {
+    position: sticky;
+    top: 60px;  /* Change this value if your header height differs */
+    z-index: 1000;
 }
