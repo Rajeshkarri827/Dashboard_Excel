@@ -1,0 +1,14 @@
+/* custom.css */
+
+/* Style the navigation links */
+.nav-link {
+    color: #ffffff !important;
+    font-weight: bold !important;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* Hover effect for navigation links */
+.nav-link:hover {
+    color: #ffcc00 !important;
+}
