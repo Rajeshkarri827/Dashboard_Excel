@@ -135,4 +135,5 @@ def render_tab_content(active_tab, selected_categories, n_intervals):
     return content
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run(debug=True)
+
