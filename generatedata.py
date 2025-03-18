@@ -10,7 +10,7 @@ np.random.seed(42)
 n = 1000
 
 # Define possible values for categorical columns
-categories = ['A', 'B', 'C', 'D']
+categories = ['Electronics', 'Food', 'Clothes', 'Furniture']
 months = ['January', 'February', 'March', 'April', 'May', 'June',
           'July', 'August', 'September', 'October', 'November', 'December']
 
