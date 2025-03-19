@@ -5,22 +5,22 @@ import dash_bootstrap_components as dbc
 from dash import dcc, html, Input, Output
 import os
 
-# Function to read data from the Excel file
+
 def get_data():
     excel_path = os.path.join('Project', 'sampledata.xlsx')
     df = pd.read_excel(excel_path)
     return df
 
-# Initialize Dash app with Bootstrap stylesheet
+
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.title = "Enhanced Excel Dashboard"
 
 app.layout = dbc.Container([
-    # Header Title with sticky class
+   
     html.H1("Enhanced Excel Data Visualization Dashboard",
             className='text-center my-4 sticky-title'),
     
-    # Navigation bar with anchor links and sticky class
+  
     dbc.NavbarSimple(
         children=[
             dbc.NavItem(html.A("Overview", href="#overview", className="nav-link")),
@@ -33,10 +33,10 @@ app.layout = dbc.Container([
         fluid=True
     ),
     
-    # Interval component for real-time updates (every 60 seconds)
+  
     dcc.Interval(id='interval-component', interval=60000, n_intervals=0),
     
-    # Dropdown for category filtering
+    
     dbc.Row([
         dbc.Col([
             html.Label("Select Category:"),
@@ -49,11 +49,11 @@ app.layout = dbc.Container([
         ], width=6)
     ], className="mb-4"),
     
-    # Overview Section (with an anchor ID for redirection)
+    
     html.H2("Overview", id="overview", className="text-center my-4"),
     dbc.Row(id='overview-section'),
     
-    # Details Section (with an anchor ID for redirection)
+    
     html.H2("Details", id="details", className="text-center my-4"),
     dbc.Row(id='details-section')
 ], fluid=True)
@@ -71,7 +71,7 @@ def update_dashboard(selected_categories, n_intervals):
     else:
         df_filtered = df
 
-    # --- Overview Section ---
+   
     total_sales = df_filtered['Sales'].sum()
     avg_profit = df_filtered['Profit'].mean()
     total_records = len(df_filtered)
@@ -93,7 +93,7 @@ def update_dashboard(selected_categories, n_intervals):
             ]), color="info", inverse=True), width=4)
     ], className="mb-4")
 
-    # Bar Chart: Total Sales by Category
+    
     sales_by_category = df_filtered.groupby('Category', as_index=False)['Sales'].sum()
     fig_bar = px.bar(sales_by_category, x='Category', y='Sales',
                      title='Total Sales by Category', color='Category',
@@ -104,8 +104,7 @@ def update_dashboard(selected_categories, n_intervals):
         dbc.Row([dbc.Col(dcc.Graph(figure=fig_bar), width=12)])
     ]
 
-    # --- Details Section ---
-    # Line Chart: Monthly Sales Trend
+
     sales_by_month = df_filtered.groupby('Month', as_index=False)['Sales'].sum()
     month_order = ['January', 'February', 'March', 'April', 'May', 'June',
                    'July', 'August', 'September', 'October', 'November', 'December']
@@ -114,20 +113,20 @@ def update_dashboard(selected_categories, n_intervals):
     fig_line = px.line(sales_by_month, x='Month', y='Sales',
                        title='Monthly Sales Trend', markers=True, labels={'Sales': 'Total Sales'})
     
-    # Scatter Plot: Sales vs. Profit
+   
     fig_scatter = px.scatter(df_filtered, x='Sales', y='Profit', title='Sales vs. Profit',
                              color='Category', hover_data=['Month'],
                              labels={'Sales': 'Sales ($)', 'Profit': 'Profit ($)'})
     
-    # Pie Chart: Sales Distribution by Month
+  
     fig_pie = px.pie(sales_by_month, names='Month', values='Sales',
                      title='Sales Distribution by Month', color_discrete_sequence=px.colors.qualitative.Pastel)
     
-    # Heatmap: Correlation between Sales and Profit
+   
     corr = df_filtered[['Sales', 'Profit']].corr()
     fig_heatmap = px.imshow(corr, text_auto=True, title='Correlation Heatmap')
     
-    # Boxplot: Profit Distribution by Category
+    
     fig_boxplot = px.box(df_filtered, x='Category', y='Profit', title='Profit Distribution by Category')
 
     details_content = dbc.Row([
